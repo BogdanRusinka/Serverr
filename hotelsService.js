@@ -12,6 +12,7 @@ var hotelService = function(){
 	
 	this.AddCountry = function(country){
 		this.CountriesLst.push(country);
+		return "OK";
 	};
 
 	this.AddHotelInCountry = function(country,item){
@@ -29,11 +30,17 @@ var hotelService = function(){
 	};
 
 	this.GetInfoAboutHotel = function(hotel){
-		return this.hotelsList = _.findWhere(this.hotelsList, {name : hotel});
+		return  _.findWhere(this.hotelsList, {name : hotel});
 	};
 
-	this.UpdateInfoAboutHotel = function(hotel){
-
+	this.UpdateInfoAboutHotel = function(hotel,params){
+		var hotel = _.findWhere(this.hotelsList, {name : hotel});
+		console.log(params);
+		if (params.description) hotel.description = params.description;
+		this.hotelsList = _.reject(this.hotelsList,function(item){
+			return item.name === hotel;
+		});
+		this.hotelsList.push(hotel);
 	};
 
 	this.CountriesLst = [

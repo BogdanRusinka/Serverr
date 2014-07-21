@@ -29,16 +29,16 @@ app.get('/api/hotels/:name/', function (req, res) {
 });
 //5
 app.post('/api/countries/', function (req, res) {
-	console.log(req.query);
-	res.send(hotelService.AddCountry(req.query.name));
+	res.send(hotelService.AddCountry(req.body));
 });
 //6
 app.post('/api/countries/:country/', function (req, res) {
-	res.send(hotelService.AddHotelInCountry(req.params.country));
+	res.send(hotelService.AddHotelInCountry(req.params.country,req.body));
 });
 //7
-app.put('/api/countries/:country/',function (req, res) {
-	res.send(hotelService.UpdateInfoAboutHotel(req.params.country));
+app.put('/api/hotels/:hotel/',function (req, res) {
+	console.log(req.param('name'));
+	res.send(hotelService.UpdateInfoAboutHotel(req.params.hotel,req.body));
 });
 
 app.listen(3000);
