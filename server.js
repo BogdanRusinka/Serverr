@@ -19,7 +19,7 @@ app.get('/api/countries/:country/', function (req, res) {
 	res.send(hotelService.getHotelsInCountry(req.params.country));
 });
 //3
-app.delete('/api/hotels/:name/',function(req,res){
+app.delete('/api/hotels/:name/',function(req,res) {
 	var hotel = hotelService.DeleteHotel(req.params.name);
 	res.end();
 });
@@ -37,7 +37,6 @@ app.post('/api/countries/:country/', function (req, res) {
 });
 //7
 app.put('/api/hotels/:hotel/',function (req, res) {
-	console.log(req.param('name'));
 	res.send(hotelService.UpdateInfoAboutHotel(req.params.hotel,req.body));
 });
 

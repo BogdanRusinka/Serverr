@@ -32,7 +32,6 @@ http.createServer(function (request, response) {
 	}
 	} else 
 	if (request.method == "DELETE"){
-		console.log("deleting");
 		if (urlArray[0] == 'api' && urlArray[1] == 'hotels' && urlArray.length == 3){
 			response.writeHead(200, {'Content-Type': 'text/html'});
     		hotelService.DeleteHotel(urlArray[2]);
@@ -40,7 +39,6 @@ http.createServer(function (request, response) {
 		}
 	} else 
 	if (request.method == "POST"){
-		console.log("posting...");
 		if (urlArray[0] == 'api' && urlArray[1] == 'countries' && urlArray.length == 2){
 			var body = "";
   			request.on('data', function (chunk) {
@@ -49,7 +47,7 @@ http.createServer(function (request, response) {
   			request.on('end', function () {
     			hotelService.AddCountry(JSON.parse(body));
     			response.writeHead(200);
-    			response.end("<h3>Yuu</h3>");
+    			response.end("<h3>POSTED!</h3>");
   			});
 		}  else {
 			if (urlArray[0] == 'api' && urlArray[1] == 'countries' && urlArray.length == 3){
@@ -65,7 +63,6 @@ http.createServer(function (request, response) {
 			}
 		}
 	} else if (request.method == "PUT"){
-		console.log("putting...");
 		if (urlArray[0] == 'api' && urlArray[1] == 'hotels' && urlArray.length == 3){
 			var body="";
 			request.on('data', function (chunk) {
@@ -81,3 +78,4 @@ http.createServer(function (request, response) {
 		}
 	}
 }).listen(8080);
+console.log('Server started on port 8080. Go to localhost:8080 for further instructions');

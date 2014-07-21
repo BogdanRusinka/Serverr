@@ -11,8 +11,7 @@ var hotelService = function(){
 	};
 	
 	this.AddCountry = function(country){
-		this.CountriesLst.push(country);
-		return "OK";
+			this.CountriesLst.push(country);
 	};
 
 	this.AddHotelInCountry = function(country,item){
@@ -30,17 +29,19 @@ var hotelService = function(){
 	};
 
 	this.GetInfoAboutHotel = function(hotel){
-		return  _.findWhere(this.hotelsList, {name : hotel});
+		var response = _.findWhere(this.hotelsList, {name : hotel});
+		if (!response) return "<h3>No such hotel in list. Try another</h3>";
+		else return response;
 	};
 
-	this.UpdateInfoAboutHotel = function(hotel,params){
+	this.UpdateInfoAboutHotel = function(hotel, params){
 		var hotel = _.findWhere(this.hotelsList, {name : hotel});
-		console.log(params);
-		if (params.description) hotel.description = params.description;
-		this.hotelsList = _.reject(this.hotelsList,function(item){
-			return item.name === hotel;
-		});
-		this.hotelsList.push(hotel);
+		if (!hotel) return "<h3>No such hotel in list. Try another</h3>"; 
+		hotel.name = params.name || hotel.name;
+		hotel.country = params.coutry || hotel.country;
+		hotel.description.rooms = params.description.rooms || hotel.description.rooms; 
+		hotel.description.price = params.description.price || hotel.description.price; 
+		hotel.description.header = params.description.header || hotel.description.header; 
 	};
 
 	this.CountriesLst = [
